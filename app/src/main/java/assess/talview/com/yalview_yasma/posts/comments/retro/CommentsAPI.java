@@ -1,4 +1,4 @@
-package assess.talview.com.yalview_yasma.comments.retro;
+package assess.talview.com.yalview_yasma.posts.comments.retro;
 
 import java.util.List;
 

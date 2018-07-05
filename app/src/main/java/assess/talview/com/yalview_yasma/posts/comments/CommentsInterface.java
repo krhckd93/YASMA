@@ -1,4 +1,4 @@
-package assess.talview.com.yalview_yasma.comments;
+package assess.talview.com.yalview_yasma.posts.comments;
 
 import assess.talview.com.yalview_yasma.base.BaseResponse;
 

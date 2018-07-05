@@ -33,4 +33,25 @@ public class PostsController {
         });
     }
 
+    public static void getPost(final PostsInterface postsInterface, int id) {
+        Retrofit retrofit = getClient();
+        PostsAPI api_interface = retrofit.create(PostsAPI.class);
+        api_interface.getPost(id).enqueue(new Callback<PostsModel>() {
+            @Override
+            public void onResponse(Call<PostsModel> call, Response<PostsModel> response) {
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setResult(response.body());
+                postsInterface.postGetPost(baseResponse);
+
+            }
+
+            @Override
+            public void onFailure(Call<PostsModel> call, Throwable t) {
+
+                BaseResponse baseResponse = new BaseResponse();
+                baseResponse.setError(t.toString());
+                postsInterface.postGetPost(baseResponse);
+            }
+        });
+    }
 }

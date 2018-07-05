@@ -1,9 +1,9 @@
-package assess.talview.com.yalview_yasma.comments.retro;
+package assess.talview.com.yalview_yasma.posts.comments.retro;
 
 import java.util.List;
 
 import assess.talview.com.yalview_yasma.base.BaseResponse;
-import assess.talview.com.yalview_yasma.comments.CommentsInterface;
+import assess.talview.com.yalview_yasma.posts.comments.CommentsInterface;
 import assess.talview.com.yalview_yasma.helper.RetroHelper;
 import retrofit2.Call;
 import retrofit2.Callback;

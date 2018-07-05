@@ -1,11 +1,11 @@
-package assess.talview.com.yalview_yasma.album.retro;
+package assess.talview.com.yalview_yasma.album.photos.retro;
 
 public class PhotosModel {
-    int albumId;
-    int id;
-    String title;
-    String url;
-    String thumbnailUrl;
+    private int albumId;
+    private int id;
+    private String title;
+    private String url;
+    private String thumbnailUrl;
 
     public int getAlbumId() { return albumId; }
 

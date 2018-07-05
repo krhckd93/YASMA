@@ -3,6 +3,7 @@ package assess.talview.com.yalview_yasma.album.retro;
 import java.util.List;
 
 import assess.talview.com.yalview_yasma.album.AlbumsInterface;
+import assess.talview.com.yalview_yasma.album.photos.retro.PhotosModel;
 import assess.talview.com.yalview_yasma.base.BaseResponse;
 import assess.talview.com.yalview_yasma.helper.RetroHelper;
 import retrofit2.Call;

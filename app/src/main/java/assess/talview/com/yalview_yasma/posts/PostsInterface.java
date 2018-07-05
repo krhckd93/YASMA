@@ -6,4 +6,6 @@ public interface PostsInterface {
 
     public void postGetPosts(BaseResponse baseResponse);
 
+    public void postGetPost(BaseResponse baseResponse);
+
 }

@@ -2,6 +2,7 @@ package assess.talview.com.yalview_yasma.album.retro;
 
 import java.util.List;
 
+import assess.talview.com.yalview_yasma.album.photos.retro.PhotosModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
