@@ -1,9 +1,9 @@
 package assess.talview.com.yalview_yasma.album.retro;
 
 public class AlbumModel {
-    int userId;
-    int id;
-    String title;
+    private int userId;
+    private int id;
+    private String title;
 
     public int getUserId() { return userId; }
 

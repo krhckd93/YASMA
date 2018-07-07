@@ -1,10 +1,10 @@
 package assess.talview.com.yalview_yasma.posts.retro;
 
 public class PostsModel {
-     long userId;
-     long id;
-     String title;
-     String body;
+    private long userId;
+    private long id;
+    private String title;
+    private String body;
 
     public long getUserId() { return userId; }
 

@@ -1,11 +1,11 @@
 package assess.talview.com.yalview_yasma.posts.comments.retro;
 
 public class CommentsModel {
-    int postId;
-    int id;
-    String name;
-    String email;
-    String body;
+    private int postId;
+    private int id;
+    private String name;
+    private String email;
+    private String body;
 
     public int getPostId() { return postId; }
 
