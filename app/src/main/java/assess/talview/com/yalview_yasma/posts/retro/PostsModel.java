@@ -1,18 +1,18 @@
 package assess.talview.com.yalview_yasma.posts.retro;
 
 public class PostsModel {
-    private long userId;
-    private long id;
+    private int userId;
+    private int id;
     private String title;
     private String body;
 
-    public long getUserId() { return userId; }
+    public int getUserId() { return userId; }
 
-    public void setUserId(long userId) { this.userId = userId; }
+    public void setUserId(int userId) { this.userId = userId; }
 
-    public long getId() { return id; }
+    public int getId() { return id; }
 
-    public void setId(long id) { this.id = id; }
+    public void setId(int id) { this.id = id; }
 
     public String getTitle() { return title; }
 

@@ -1,62 +1,31 @@
 package assess.talview.com.yalview_yasma.user;
 
+import android.app.Application;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-import android.util.Log;
+import android.content.Context;
 
 import java.util.List;
+import assess.talview.com.yalview_yasma.user.room.UserModel;
+public class UsersViewModel extends ViewModel {
 
-import assess.talview.com.yalview_yasma.base.BaseResponse;
-import assess.talview.com.yalview_yasma.user.retro.UserController;
-import assess.talview.com.yalview_yasma.user.retro.UserModel;
+    private LiveData<List<UserModel>> users;
+    private UserRepository userRepository;
 
-public class UsersViewModel extends ViewModel implements UserInterface {
+    // TODO: 08-Jul-18 Default contructor called, argument constructor needs to be called for initialization
+    public UsersViewModel() {}
 
-    private MutableLiveData<List<UserModel>> users;
-    private MutableLiveData<UserModel> user;
+    public UsersViewModel(Context applicationContext) {
+        userRepository = new UserRepository(applicationContext);
+        users = userRepository.getUsers();
+    }
 
-
-    public LiveData<List<UserModel>> getUsers() {
+    // TODO: 08-Jul-18 Context is being passed, find a workaround without the need of context
+    public LiveData<List<UserModel>> getUsers(Context applicationContext) {
         if(users == null) {
-            users = new MutableLiveData<List<UserModel>>();
+            if(userRepository == null) { userRepository = new UserRepository(applicationContext); }
+            users = userRepository.getUsers();
         }
-        UserController.getUsers(this);
         return users;
-    }
-
-    public LiveData<UserModel> getUser(int id) {
-        if(user == null) {
-            user = new MutableLiveData<UserModel>();
-        }
-        UserController.getUser(this, id);
-        return user;
-    }
-
-    @Override
-    public void postGetUsers(BaseResponse baseResponse) {
-        if(baseResponse.getError() != null) {
-            Log.e("UsersViewModel", baseResponse.getError());
-            return;
-        }
-        if(users == null) {
-            users = new MutableLiveData<List<UserModel>>();
-        }
-        // TODO: 05-Jul-18 Handle datatype check and mismatch
-        users.setValue((List<UserModel>) baseResponse.getResult());
-    }
-
-    @Override
-    public void postGetUser(BaseResponse baseResponse) {
-        if(baseResponse.getError() != null) {
-            Log.e("UsersViewModel", baseResponse.getError());
-            return;
-        }
-        if(user == null) {
-            user = new MutableLiveData<UserModel>();
-        }
-
-        // TODO: 05-Jul-18 Handle datatype check and mismatch
-        user.setValue((UserModel) baseResponse.getResult());
     }
 }

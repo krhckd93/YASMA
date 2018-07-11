@@ -1,8 +1,11 @@
 package assess.talview.com.yalview_yasma.posts.comments;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.List;
@@ -10,26 +13,22 @@ import java.util.List;
 import assess.talview.com.yalview_yasma.base.BaseResponse;
 import assess.talview.com.yalview_yasma.posts.comments.retro.CommentsController;
 import assess.talview.com.yalview_yasma.posts.comments.retro.CommentsModel;
+import assess.talview.com.yalview_yasma.posts.comments.room.CommentModel;
 
-public class CommentsViewModel extends ViewModel implements CommentsInterface {
+public class CommentsViewModel extends AndroidViewModel {
     
-    private MutableLiveData<List<CommentsModel>> comments;
-    
-    public LiveData<List<CommentsModel>> getComments(int post_id) {
-        if(comments == null) {
-            comments = new MutableLiveData<List<CommentsModel>>();
-        }
-        CommentsController.getPostComments(this, post_id);
-        return comments;
+    private LiveData<List<CommentModel>> comments;
+    private CommentRepository commentRepository;
+
+    public CommentsViewModel(@NonNull Application application) {
+        super(application);
+        commentRepository = new CommentRepository(application);
     }
 
-    @Override
-    public void postGetComments(BaseResponse baseResponse) {
-        if (baseResponse.getError() != null) {
-            Log.e("CommentsViewModel", baseResponse.getError());
-            return;
+    public LiveData<List<CommentModel>> getComments(int post_id) {
+        if(comments == null) {
+            comments = commentRepository.getComments(post_id);
         }
-        // TODO: 05-Jul-18 Handle datatype check and mismatch 
-        comments.setValue((List<CommentsModel>) baseResponse.getResult());
+        return comments;
     }
 }

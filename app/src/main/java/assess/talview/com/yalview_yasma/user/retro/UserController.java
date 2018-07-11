@@ -51,4 +51,10 @@ public class UserController {
             }
         });
     }
+
+    public static void getUser(Callback callback, int id) {
+        Retrofit retrofit = RetroHelper.getClient();
+        UserAPI userAPI = retrofit.create(UserAPI.class);
+        userAPI.getUser(id).enqueue(callback);
+    }
 }

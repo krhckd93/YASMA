@@ -1,34 +1,38 @@
 package assess.talview.com.yalview_yasma.album.photos;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.util.Log;
+import android.support.annotation.NonNull;
 
 import java.util.List;
 
 import assess.talview.com.yalview_yasma.album.photos.retro.PhotoController;
-import assess.talview.com.yalview_yasma.album.photos.retro.PhotosModel;
-import assess.talview.com.yalview_yasma.base.BaseResponse;
+import assess.talview.com.yalview_yasma.album.photos.room.PhotoModel;
 
-public class PhotoViewModel extends ViewModel implements PhotosInterface {
-    private MutableLiveData<List<PhotosModel>> photos;
+public class PhotoViewModel extends AndroidViewModel {
+    private LiveData<List<PhotoModel>> photos;
+    private PhotoRepository photoRepository;
 
-    public LiveData<List<PhotosModel>> getAlbumPhotos(int album_id) {
+    public PhotoViewModel(@NonNull Application application) {
+        super(application);
+        photoRepository = new PhotoRepository(application);
+    }
+
+    public LiveData<List<PhotoModel>> getAlbumPhotos(int album_id) {
         if(photos == null) {
-            photos = new MutableLiveData<List<PhotosModel>>();
+            photos = photoRepository.getAlbumPhotos(album_id);
         }
-        PhotoController.getAlbumPhotos(this, album_id);
         return photos;
     }
 
-    @Override
-    public void postGetAlbumPhotos(BaseResponse baseResponse) {
-        if(baseResponse.getError() != null) {
-            Log.e("PhotosViewModel", baseResponse.getError());
-            return;
-        }
-        // TODO: 05-Jul-18 Handle datatype check
-        photos.setValue((List<PhotosModel>) baseResponse.getResult());
+    public List<PhotoModel> getAlbumPhotosObjects(int album_id) {
+        return photoRepository.getAlbumPhotosObjects(album_id);
+    }
+
+    public PhotoModel getPhotoObjectById(int photo_id) {
+        return photoRepository.getPhotoObjectById(photo_id);
     }
 }
+
+

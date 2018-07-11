@@ -54,4 +54,10 @@ public class PostsController {
             }
         });
     }
+
+    public static void getPost(Callback callback, int id) {
+        Retrofit retrofit = getClient();
+        PostsAPI api_interface = retrofit.create(PostsAPI.class);
+        api_interface.getPost(id).enqueue(callback);
+    }
 }
